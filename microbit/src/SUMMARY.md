@@ -1,0 +1,70 @@
+[Introduction](README.md)
+- [Contexte](01-background/README.md)
+- [Exigences en matière de matériel et de connaissances](02-requirements/README.md)
+- [Configurer un environnement de développement](03-setup/README.md)
+    - [Linux](03-setup/linux.md)
+    - [Windows](03-setup/windows.md)
+    - [macOS](03-setup/macos.md)
+    - [Vérification de l'installation](03-setup/verify.md)
+    - [Configuration de l'IDE](03-setup/IDE.md)
+- [Faire connaissance avec le matériel](04-meet-your-hardware/README.md)
+    - [micro:bit v2](04-meet-your-hardware/microbit-v2.md)
+    - [micro:bit v1](04-meet-your-hardware/microbit-v1.md)
+    - [Terminologie de Rust Embedded](04-meet-your-hardware/terminology.md)
+- [LED roulette](05-led-roulette/README.md)
+    - [Construis-le](05-led-roulette/build-it.md)
+    - [Flashe-le](05-led-roulette/flash-it.md)
+    - [Débogue-le](05-led-roulette/debug-it.md)
+    - [Allume-le](05-led-roulette/light-it-up.md)
+    - [Ca clignote](05-led-roulette/it-blinks.md)
+    - [Le challenge](05-led-roulette/the-challenge.md)
+    - [Ma solution](05-led-roulette/my-solution.md)
+- [Communication série](06-serial-communication/README.md)
+    - [\*nix tooling](06-serial-communication/nix-tooling.md)
+    - [Windows tooling](06-serial-communication/windows-tooling.md)
+- [UART](07-uart/README.md)
+    - [Envoyer un seul octet](07-uart/send-a-single-byte.md)
+    - [Envoyer une chaîne de caractère](07-uart/send-a-string.md)
+    - [Approche naïve et `write!`](07-uart/naive-approch-write.md)
+    - [Recevoir un seul octet](07-uart/receive-a-single-byte.md)
+    - [Echo server](07-uart/echo-server.md)
+    - [Renverser une chaîne de caractère](07-uart/reverse-a-string.md)
+    - [Ma solution](07-uart/my-solution.md)
+- [I2C](08-i2c/README.md)
+    - [Le protocole](08-i2c/the-general-protocol.md)
+    - [LSM303AGR](08-i2c/lsm303agr.md)
+    - [Lire un seul registre](08-i2c/read-a-single-register.md)
+    - [Utilisation d'un driver](08-i2c/using-a-driver.md)
+    - [Le challenge](08-i2c/the-challenge.md)
+    - [Ma solution](08-i2c/my-solution.md)
+- [Boussole à LED](09-led-compass/README.md)
+    - [Etalonnage](09-led-compass/calibration.md)
+    - [Exemple 1](09-led-compass/take-1.md)
+    - [Solution 1](09-led-compass/solution-1.md)
+    - [Exemple 2](09-led-compass/take-2.md)
+    - [Solution 2](09-led-compass/solution-2.md)
+    - [Magnitude](09-led-compass/magnitude.md)
+- [Capteur de frappe](10-punch-o-meter/README.md)
+    - [La gravité augmente ?](10-punch-o-meter/gravity-is-up.md)
+    - [Le challenge](10-punch-o-meter/the-challenge.md)
+    - [Ma solution](10-punch-o-meter/my-solution.md)
+- [Le Snake game](11-snake-game/README.md)
+    - [La logique du jeu](11-snake-game/game-logic.md)
+    - [Les contrôles](11-snake-game/controls.md)
+    - [Affichage non-bloquant](11-snake-game/nonblocking-display.md)
+- [Ce qu'il vous reste à explorer](explore.md)
+
+---
+
+[Dépannage](appendix/1-general-troubleshooting/README.md)
+[Comment utiliser GDB](appendix/2-how-to-use-gdb/README.md)
+
+<!-- - [Async IO: The future](17-async-io-the-future/README.md) -->
+<!--     - [Timer](17-async-io-the-future/timer.md) -->
+<!--     - [Serial](17-async-io-the-future/serial.md) -->
+<!--     - [The challenge](17-async-io-the-future/the-challenge.md) -->
+<!--     - [My solution](17-async-io-the-future/my-solution.md) -->
+<!--     - [Another challenge](17-async-io-the-future/another-challenge.md) -->
+<!--     - [My other solution](17-async-io-the-future/my-other-solution.md) -->
+<!--     - [More challenges](17-async-io-the-future/more-challenges.md) -->
+---
