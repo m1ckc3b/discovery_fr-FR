@@ -1,38 +1,38 @@
-# Flash it
+# Flashe-le
 
-Flashing is the process of moving our program into the microcontroller's (persistent) memory. Once
-flashed, the microcontroller will execute the flashed program every time it is powered on.
+Le flashage est le processus de déplacement de notre programme dans la mémoire (persistante) du microcontrôleur. Une fois
+flashé, le microcontrôleur exécutera le programme flashé à chaque fois qu'il sera mis sous tension.
 
-In this case, our `led-roulette` program will be the *only* program in the microcontroller memory.
-By this I mean that there's nothing else running on the microcontroller: no OS, no "daemon",
-nothing. `led-roulette` has full control over the device.
+Dans ce cas, notre programme `led-roulette` sera le *seul* programme dans la mémoire du microcontrôleur.
+Je veux dire par là qu'il n'y a rien d'autre qui tourne sur le microcontrôleur : pas d'OS, pas de " daemon ",
+rien. `led-roulette` a le contrôle total sur l'appareil.
 
-Flashing the binary itself is quite simple thanks to `cargo embed`.
+Le flashage du binaire lui-même est assez simple grâce à `cargo embed`.
 
-Before executing that command though, let's look into what it actually does. If you look at the side of your micro:bit
-with the USB connector facing upwards you will notice, that there are actually 2 black squares on there
-(on the micro:bit v2 there is a third and biggest one, which is a speaker), one is our MCU
-we already talked about but what purpose does the other one serve? The other chip has 3 main purposes:
+Avant d'exécuter cette commande, voyons ce qu'elle fait réellement. Si vous regardez le côté de votre micro:bit
+avec le connecteur USB tourné vers le haut, vous remarquerez qu'il y a en fait 2 carrés noirs dessus
+(sur le micro:bit v2, il y en a même un troisième, un peu plus grand, qui est un haut-parleur), l'un est notre MCU
+dont nous avons déjà parlé mais à quoi sert l'autre ? L'autre puce a 3 objectifs principaux :
 
-1. Provide power from the USB connector to our MCU
-2. Provide a serial to USB bridge for our MCU (we will look into that in a later chapter)
-3. Being a programmer/debugger (this is the relevant purpose for now)
+1. Fournir l'alimentation du connecteur USB à notre MCU
+2. Fournir un pont série vers USB pour notre MCU (nous verrons cela dans un chapitre ultérieur)
+3. Être un programmeur/débogueur (c'est l'objectif pertinent pour l'instant)
 
-Basically this chip acts as a bridge between our computer (to which it is connected via USB) and the MCU (to which it is
-connected via traces and communicates with using the SWD protocol). This bridge enables us to flash new binaries on to
-the MCU, inspect its state via a debugger and other things.
+En gros, cette puce agit comme un pont entre notre ordinateur (auquel elle est connectée via USB) et le MCU (auquel elle est
+connectée via les circuits imprimés sur la carte et communique avec en utilisant le protocole SWD). Ce pont nous permet de flasher de nouveaux binaires sur
+le MCU, d'inspecter son état via un débogueur et d'autres choses.
 
-So lets flash it!
+Alors flashons-le !
 
 ```console
-# For micro:bit v2
+# Pour micro:bit v2
 $ cargo embed --features v2 --target thumbv7em-none-eabihf
   (...)
      Erasing sectors ✔ [00:00:00] [####################################################################################################################################################]  2.00KiB/ 2.00KiB @  4.21KiB/s (eta 0s )
  Programming pages   ✔ [00:00:00] [####################################################################################################################################################]  2.00KiB/ 2.00KiB @  2.71KiB/s (eta 0s )
     Finished flashing in 0.608s
 
-# For micro:bit v1
+# Pour micro:bit v1
 $ cargo embed --features v1 --target thumbv6m-none-eabi
   (...)
      Erasing sectors ✔ [00:00:00] [####################################################################################################################################################]  2.00KiB/ 2.00KiB @  4.14KiB/s (eta 0s )
@@ -41,8 +41,8 @@ $ cargo embed --features v1 --target thumbv6m-none-eabi
 ```
 
 
-You will notice that `cargo-embed` blocks after outputting the last line, this is intended and you should not close it
-since we need it in this state for the next step: debugging it! Furthermore, you will have noticed that the `cargo build`
-and `cargo embed` are actually passed the same flags, this is because `cargo embed` actually executes the build and then
-flashes the resulting binary on to the chip, hence you can leave out the `cargo build` step in the future if you
-want to flash your code right away.
+Vous remarquerez que `cargo-embed` se bloque après avoir affiché la dernière ligne, c'est prévu et vous ne devez pas le fermer
+puisque nous en avons besoin dans cet état pour l'étape suivante : le débogage ! De plus, vous aurez remarqué que `cargo build`
+et `cargo embed` reçoivent en fait les mêmes indicateurs, car `cargo embed` exécute en fait la construction puis
+flashe le binaire résultant sur la puce, vous pouvez donc omettre l'étape `cargo build` à l'avenir si vous
+souhaitez flasher votre code tout de suite.

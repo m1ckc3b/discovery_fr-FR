@@ -1,59 +1,56 @@
-# LED roulette
+# Roulette LED
 
-Alright, let's start by building the following application:
+Très bien, commençons par créer l'application suivante :
 
 <p align="center">
 <video src="../assets/roulette_fast.mp4" loop autoplay>
 </p>
 
-I'm going to give you a high level API to implement this app but don't worry we'll do low level
-stuff later on. The main goal of this chapter is to get familiar with the *flashing* and debugging
-process.
+Je vais vous donner une API de haut niveau pour implémenter cette application, mais ne vous inquiétez pas, nous ferons des choses de bas niveau plus tard. L'objectif principal de ce chapitre est de vous familiariser avec le processus de *clignotement* et de débogage.
 
-The starter code is in the `src` directory of the book repository. Inside that directory there are more
-directories named after each chapter of this book. Most of those directories are starter Cargo
-projects.
+Le code de démarrage se trouve dans le répertoire `src` du référentiel du livre. À l'intérieur de ce répertoire, il y a d'autres
+répertoires nommés d'après chaque chapitre de ce livre. La plupart de ces répertoires sont des
+projets Cargo de démarrage.
 
-Now, jump into the `src/05-led-roulette` directory. Check the `src/main.rs` file:
+Maintenant, accédez au répertoire `src/05-led-roulette`. Vérifiez le fichier `src/main.rs` :
 
 ``` rust
 {{#include src/main.rs}}
 ```
 
-Microcontroller programs are different from standard programs in two aspects: `#![no_std]` and
+Les programmes de microcontrôleurs sont différents des programmes standards sur deux aspects : `#![no_std]` et
 `#![no_main]`.
 
-The `no_std` attribute says that this program won't use the `std` crate, which assumes an underlying
-OS; the program will instead use the `core` crate, a subset of `std` that can run on bare metal
-systems (i.e., systems without OS abstractions like files and sockets).
+L'attribut `no_std` indique que ce programme n'utilisera pas la crate `std`, qui suppose un
+système d'exploitation sous-jacent ; le programme utilisera à la place la crate `core`, un sous-ensemble de `std` qui peut s'exécuter sur des
+systèmes bare metal (c'est-à-dire des systèmes sans abstractions de système d'exploitation comme les fichiers et les sockets).
 
-The `no_main` attribute says that this program won't use the standard `main` interface, which is
-tailored for command line applications that receive arguments. Instead of the standard `main` we'll
-use the `entry` attribute from the [`cortex-m-rt`] crate to define a custom entry point. In this
-program we have named the entry point "main", but any other name could have been used. The entry
-point function must have signature `fn() -> !`; this type indicates that the function can't return
--- this means that the program never terminates.
+L'attribut `no_main` indique que ce programme n'utilisera pas l'interface `main` standard, qui
+est adaptée aux applications en ligne de commande qui reçoivent des arguments. Au lieu de l'interface `main` standard, nous
+utiliserons l'attribut `entry` de la crate [`cortex-m-rt`] pour définir un point d'entrée personnalisé. Dans ce
+programme, nous avons nommé le point d'entrée "main", mais tout autre nom aurait pu être utilisé. La fonction de point d'entrée
+doit avoir la signature `fn() -> !` ; ce type indique que la fonction ne retourne rien
+-- cela signifie que le programme ne se termine jamais.
 
-[`cortex-m-rt`]: https://crates.io/crates/cortex-m-rt
+[`cortex-m-rt`] : https://crates.io/crates/cortex-m-rt
 
-If you are a careful observer, you'll also notice there is a `.cargo` directory in the Cargo project
-as well. This directory contains a Cargo configuration file (`.cargo/config`) that tweaks the
-linking process to tailor the memory layout of the program to the requirements of the target device.
-This modified linking process is a requirement of the `cortex-m-rt` crate.
+Si vous êtes un observateur attentif, vous remarquerez également qu'il existe un répertoire `.cargo`. Ce répertoire contient un fichier de configuration Cargo (`.cargo/config`) qui modifie le
+processus de liaison pour adapter la disposition de la mémoire du programme aux exigences du périphérique cible.
+Ce processus de liaison modifié est une exigence de la crate `cortex-m-rt`.
 
-Furthermore, there is also an `Embed.toml` file
+De plus, il existe également un fichier `Embed.toml`
 
 ```toml
 {{#include Embed.toml}}
 ```
 
-This file tells `cargo-embed` that:
+Ce fichier indique à `cargo-embed` que :
 
-* we are working with either a nrf52833 or nrf51822, you will again have to remove the comments from the
-  chip you are using, just like you did in chapter 3.
-* we want to halt the chip after we flashed it so our program does not instantly jump to the loop
-* we want to disable RTT, RTT being a protocol that allows the chip to send text to a debugger.
-  You have in fact already seen RTT in action, it was the protocol that sent "Hello World" in chapter 3.
-* we want to enable GDB, this will be required for the debugging procedure
+* nous travaillons avec un nrf52833 ou un nrf51822, vous devrez à nouveau supprimer les commentaires de la
+puce que vous utilisez, comme vous l'avez fait au chapitre 3.
+* nous voulons arrêter la puce après l'avoir flashée afin que notre programme ne saute pas instantanément dans la boucle
+* nous voulons désactiver RTT, qui est un protocole permettant à la puce d'envoyer du texte à un débogueur.
+Vous avez en fait déjà vu RTT en action, c'était le protocole qui a envoyé "Hello World" au chapitre 3.
+* nous voulons activer GDB, cela sera nécessaire pour la procédure de débogage
 
-Alright, let's start by building this program.
+Très bien, commençons par construire ce programme.

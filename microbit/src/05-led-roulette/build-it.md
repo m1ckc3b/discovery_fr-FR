@@ -1,45 +1,43 @@
-# Build it
+# Construis-le
 
-The first step is to build our "binary" crate. Because the microcontroller has a different
-architecture than your computer we'll have to cross compile. Cross compiling in Rust land is as simple
-as passing an extra `--target` flag to `rustc`or Cargo. The complicated part is figuring out the
-argument of that flag: the *name* of the target.
+La première étape consiste à construire notre crate "binaire". Étant donné que le microcontrôleur a une architecture
+différente de celle de votre ordinateur, nous devrons effectuer une compilation croisée. La compilation croisée dans le monde de Rust est aussi simple
+que de passer un indicateur `--target` supplémentaire à `rustc` ou Cargo. La partie compliquée consiste à déterminer l'argument
+de cet indicateur : le *nom* de la cible.
 
-As we already know the microcontroller on the micro:bit v2 has a Cortex-M4F processor in it, the one on v1 a Cortex-M0.
-`rustc` knows how to cross-compile to the Cortex-M architecture and provides several different targets that cover the different processors
-families within that architecture:
+Comme nous le savons déjà, le microcontrôleur du micro:bit v2 possède un processeur Cortex-M4F, celui du v1 est un Cortex-M0.
+`rustc` sait comment effectuer une compilation croisée vers l'architecture Cortex-M et fournit plusieurs cibles différentes qui couvrent les différentes familles de processeurs au sein de cette architecture :
 
-- `thumbv6m-none-eabi`, for the Cortex-M0 and Cortex-M1 processors
-- `thumbv7m-none-eabi`, for the Cortex-M3 processor
-- `thumbv7em-none-eabi`, for the Cortex-M4 and Cortex-M7 processors
-- `thumbv7em-none-eabihf`, for the Cortex-M4**F** and Cortex-M7**F** processors
-- `thumbv8m.main-none-eabi`, for the Cortex-M33 and Cortex-M35P processors
-- `thumbv8m.main-none-eabihf`, for the Cortex-M33**F** and Cortex-M35P**F** processors
+- `thumbv6m-none-eabi`, pour les processeurs Cortex-M0 et Cortex-M1
+- `thumbv7m-none-eabi`, pour le processeur Cortex-M3
+- `thumbv7em-none-eabi`, pour les processeurs Cortex-M4 et Cortex-M7
+- `thumbv7em-none-eabihf`, pour les processeurs Cortex-M4**F** et Cortex-M7**F**
+- `thumbv8m.main-none-eabi`, pour les processeurs Cortex-M33 et Cortex-M35P
+- `thumbv8m.main-none-eabihf`, pour le Cortex-M33**F** et les processeurs Cortex-M35P**F**
 
-For the micro:bit v2, we'll use the `thumbv7em-none-eabihf` target, for v1 the `thumbv6m-none-eabi` one.
-Before cross-compiling you have to download a pre-compiled version of the standard library
-(a reduced version of it, actually) for your target. That's done using `rustup`:
+Pour le micro:bit v2, nous utiliserons la cible `thumbv7em-none-eabihf`, pour la v1 celle `thumbv6m-none-eabi`.
+Avant de procéder à la compilation croisée, vous devez télécharger une version précompilée de la bibliothèque standard
+(une version réduite de celle-ci, en fait) pour votre cible. Cela se fait à l'aide de `rustup` :
 
 ``` console
-# For micro:bit v2
+# Pour micro:bit v2
 $ rustup target add thumbv7em-none-eabihf
-# For micro:bit v1
+# Pour micro:bit v1
 $ rustup target add thumbv6m-none-eabi
 ```
 
-You only need to do the above step once; `rustup` will re-install a new standard library
-(`rust-std` component) whenever you update your toolchain. Therefore you can skip this step, if you have already added the necessary target
-while [verifying your setup].
+Vous n'avez besoin d'effectuer l'étape ci-dessus qu'une seule fois ; `rustup` réinstallera une nouvelle bibliothèque standard
+(composant `rust-std`) à chaque mise à jour de votre chaîne d'outils. Vous pouvez donc ignorer cette étape si vous avez déjà ajouté la cible
+nécessaire lors de la [vérification de votre configuration].
 
-[verifying your setup]: ../03-setup/verify.html#verifying-cargo-embed
+[vérification de votre configuration] : ../03-setup/verify.html#verifying-cargo-embed
 
-
-With the `rust-std` component in place you can now cross compile the program using Cargo:
+Avec le composant `rust-std` en place, vous pouvez maintenant effectuer une compilation croisée du programme à l'aide de Cargo :
 
 ``` console
-# make sure you are in the `src/05-led-roulette` directory
+# assurez-vous que vous êtes dans le répertoire `src/05-led-roulette`
 
-# For micro:bit v2
+# Pour micro:bit v2
 $ cargo build --features v2 --target thumbv7em-none-eabihf
    Compiling semver-parser v0.7.0
    Compiling typenum v1.12.0
@@ -48,7 +46,7 @@ $ cargo build --features v2 --target thumbv7em-none-eabihf
    Compiling microbit-v2 v0.10.1
     Finished dev [unoptimized + debuginfo] target(s) in 33.67s
 
-# For micro:bit v1
+# Pour micro:bit v1
 $ cargo build --features v1 --target thumbv6m-none-eabi
    Compiling fixed v1.2.0
    Compiling syn v1.0.39
@@ -58,16 +56,16 @@ $ cargo build --features v1 --target thumbv6m-none-eabi
 	Finished dev [unoptimized + debuginfo] target(s) in 22.73s
 ```
 
-> **NOTE** Be sure to compile this crate *without* optimizations. The provided Cargo.toml
-> file and build command above will ensure optimizations are off.
+> **REMARQUE** Assurez-vous de compiler cette caisse *sans* optimisations. Le fichier Cargo.toml
+> fourni et la commande de construction ci-dessus garantiront que les optimisations sont désactivées.
 
-OK, now we have produced an executable. This executable won't blink any LEDs,
-it's just a simplified version that we will build upon later in the chapter.
-As a sanity check, let's verify that the produced executable is actually an ARM binary:
+OK, nous avons maintenant produit un exécutable. Cet exécutable ne fera clignoter aucune LED,
+c'est juste une version simplifiée sur laquelle nous nous baserons plus tard dans le chapitre.
+Pour vérifier la cohérence, vérifions que l'exécutable produit est en fait un binaire ARM :
 
 ``` console
-# For micro:bit v2
-# equivalent to `readelf -h target/thumbv7em-none-eabihf/debug/led-roulette`
+# Pour micro:bit v2
+# équivalent à `readelf -h target/thumbv7em-none-eabihf/debug/led-roulette`
 $ cargo readobj --features v2 --target thumbv7em-none-eabihf --bin led-roulette -- --file-headers
     Finished dev [unoptimized + debuginfo] target(s) in 0.01s
 ELF Header:
@@ -91,8 +89,8 @@ ELF Header:
   Number of section headers:         21
   Section header string table index: 19
 
-# For micro:bit v1
-# equivalent to `readelf -h target/thumbv6m-none-eabi/debug/led-roulette`
+# Pour micro:bit v1
+# équivalent à `readelf -h target/thumbv6m-none-eabi/debug/led-roulette`
 $ cargo readobj --features v1 --target thumbv6m-none-eabi --bin led-roulette -- --file-headers
     Finished dev [unoptimized + debuginfo] target(s) in 0.01s
 ELF Header:
@@ -117,4 +115,4 @@ ELF Header:
   Section header string table index: 20
 ```
 
-Next, we'll flash the program into our microcontroller.
+Ensuite, nous allons flasher le programme dans notre microcontrôleur.
