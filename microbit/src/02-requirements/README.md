@@ -1,64 +1,64 @@
-# Hardware/knowledge requirements
+# Exigences matérielles/connaissances
 
-The primary knowledge requirement to read this book is to know *some* Rust. It's
-hard for me to quantify *some* but at least I can tell you that you don't need
-to fully grok generics, but you do need to know how to *use* closures. You also
-need to be familiar with the idioms of the [2018 edition], in particular with
-the fact that `extern crate` is not necessary in the 2018 edition.
+La principale exigence de connaissances pour lire ce livre est de connaître *un peu* de Rust. Il est
+difficile pour moi de quantifier *un peu* mais au moins je peux vous dire que vous n'avez pas besoin
+de comprendre complètement les génériques, mais vous devez savoir comment *utiliser* les fermetures. Vous devez également
+être familier avec les idiomes de l'[édition 2018], en particulier
+avec le fait que `extern crate` n'est pas nécessaire dans l'édition 2018.
 
-[2018 edition]: https://rust-lang-nursery.github.io/edition-guide/
+[édition 2018] : https://rust-lang-nursery.github.io/edition-guide/
 
-Also, to follow this material you'll need the following hardware:
+De plus, pour suivre ce matériel, vous aurez besoin du matériel suivant :
 
-- A [micro:bit v2] board, alternatively a [micro:bit v1.5] board, the book
-  will refer to the v1.5 as just v1.
+- Une carte [micro:bit v2], ou bien une carte [micro:bit v1.5], le livre
+fera référence à la v1.5 comme étant simplement v1.
 
-[micro:bit v2]: https://tech.microbit.org/hardware/
-[micro:bit v1.5]: https://tech.microbit.org/hardware/1-5-revision/
+[micro:bit v2] : https://tech.microbit.org/hardware/
+[micro:bit v1.5] : https://tech.microbit.org/hardware/1-5-revision/
 
-(You can purchase this board from several [electronics][0] [suppliers][1])
+(Vous pouvez acheter cette carte auprès de plusieurs [fournisseurs][0][1] d'électronique)
 
-[0]: https://microbit.org/buy/
-[1]: https://www.mouser.com/microbit/_/N-aez3t?P=1y8um0l
+[0] : https://microbit.org/buy/
+[1] : https://www.mouser.com/microbit/_/N-aez3t?P=1y8um0l
 
 <p align="center">
 <img title="micro:bit" src="../assets/microbit-v2.jpg">
 </p>
 
-> **NOTE** This is an image of a micro:bit v2, the front of the v1 looks slightly different
+> **REMARQUE** Ceci est une image d'un micro:bit v2, l'avant du v1 est légèrement différent
 
-- One micro-B USB cable, required to make the micro:bit board work.
-  Make sure that the cable supports data transfer as some cables only support charging devices.
+- Un câble USB micro-B, nécessaire pour faire fonctionner la carte micro:bit.
+Assurez-vous que le câble prend en charge le transfert de données, car certains câbles ne prennent en charge que les appareils de charge.
 
 <p align="center">
-<img title="micro-B USB cable" src="../assets/usb-cable.jpg">
+<img title="câble USB micro-B" src="../assets/usb-cable.jpg">
 </p>
 
-> **NOTE** You may already have a cable like this, as some micro:bit kits ship with such cables.
-> Some USB cables used to charge mobile devices may also work, if they are micro-B and have the
-> capability to transmit data.
+> **REMARQUE** Vous possédez peut-être déjà un câble comme celui-ci, car certains kits micro:bit sont livrés avec de tels câbles.
+> Certains câbles USB utilisés pour charger des appareils mobiles peuvent également fonctionner, s'ils sont micro-B et ont la
+> capacité de transmettre des données.
 
-> **FAQ**: Wait, why do I need this specific hardware?
+> **FAQ** : Attendez, pourquoi ai-je besoin de ce matériel spécifique ?
 
-It makes my life and yours much easier.
+Cela facilite grandement ma vie et la vôtre.
 
-The material is much, much more approachable if we don't have to worry about hardware differences.
-Trust me on this one.
+Le matériel est beaucoup, beaucoup plus accessible si nous n'avons pas à nous soucier des différences matérielles.
+Faites-moi confiance sur ce point.
 
-> **FAQ**: Can I follow this material with a different development board?
+> **FAQ** : Puis-je suivre ce matériel avec une autre carte de développement ?
 
-Maybe? It depends mainly on two things: your previous experience with microcontrollers and/or
-whether a high level crate already exists, like the [`nrf52-hal`], for your development board
-somewhere. You can look through the [Awesome Embedded Rust HAL list] for your microcontroller,
-if you intend to use a different one.
+Peut-être ? Cela dépend principalement de deux choses : votre expérience antérieure avec les microcontrôleurs et/ou
+si une caisse de haut niveau existe déjà, comme le [`nrf52-hal`], pour votre carte de développement
+quelque part. Vous pouvez consulter la [Awesome Embedded Rust HAL list] pour votre microcontrôleur,
+si vous avez l'intention d'en utiliser un autre.
 
-[`nrf52-hal`]: https://docs.rs/nrf52-hal
-[Awesome Embedded Rust HAL list]: https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates
+[`nrf52-hal`] : https://docs.rs/nrf52-hal
+[Awesome Embedded Rust HAL list] : https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates
 
-With a different development board, this text would lose most if not all its beginner friendliness
-and "easy to follow"-ness, IMO.
+Avec une autre carte de développement, ce texte perdrait la plupart, voire la totalité, de sa convivialité pour les débutants
+et de son côté « facile à suivre », à mon avis.
 
-If you have a different development board and you don't consider yourself a total beginner, you are
-better off starting with the [quickstart] project template.
+Si vous avez une autre carte de développement et que vous ne vous considérez pas comme un débutant total, il est
+mieux de commencer avec le modèle de projet [quickstart].
 
-[quickstart]: https://rust-embedded.github.io/cortex-m-quickstart/cortex_m_quickstart/
+[quickstart] : https://rust-embedded.github.io/cortex-m-quickstart/cortex_m_quickstart/
