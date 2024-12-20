@@ -1,4 +1,5 @@
-# Light it up
+# Allume-le
+
 ## embedded-hal
 
 In this chapter we are going to make one of the many LEDs on the back of the micro:bit light up since this is
