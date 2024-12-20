@@ -1,20 +1,20 @@
 # macOS
 
-All the tools can be installed using [Homebrew]:
+Tous les outils peuvent être installés en utilisant [Homebrew] :
 
-[Homebrew]: http://brew.sh/
+[Homebrew] : http://brew.sh/
 
 ``` console
-$ # ARM GCC debugger
+$ # Débogueur ARM GCC
 $ brew install arm-none-eabi-gdb
 
 $ # Minicom
 $ brew install minicom
 
-$ # lsusb (list connected USB devices)
+$ # lsusb (liste des périphériques USB connectés)
 $ brew install lsusb
 ```
 
-That's all! Go to the [next section].
+C'est tout ! Allez à la [section suivante].
 
-[next section]: verify.md
+[section suivante] : verify.md

@@ -2,9 +2,9 @@
 
 ## `arm-none-eabi-gdb`
 
-ARM provides `.exe` installers for Windows. Grab one from [here][gcc], and follow the instructions.
-Just before the installation process finishes tick/select the "Add path to environment variable"
-option. Then verify that the tools are in your `%PATH%`:
+ARM fournit des installateurs `.exe` pour Windows. Prenez-en un depuis [ici][gcc] et suivez les instructions.
+Juste avant la fin du processus d'installation, cochez/sélectionnez l'option "Ajouter un chemin à la variable d'environnement"
+. Vérifiez ensuite que les outils se trouvent dans votre `%PATH%` :
 
 ``` console
 $ arm-none-eabi-gcc -v
@@ -12,14 +12,14 @@ $ arm-none-eabi-gcc -v
 gcc version 5.4.1 20160919 (release) (..)
 ```
 
-[gcc]: https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+[gcc] : https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
 
 ## PuTTY
 
-Download the latest `putty.exe` from [this site] and place it somewhere in your `%PATH%`.
+Téléchargez le dernier `putty.exe` depuis [ce site] et placez-le quelque part dans votre `%PATH%`.
 
-[this site]: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+[ce site] : http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 
-Now, go to the [next section].
+Maintenant, allez à la [section suivante].
 
-[next section]: verify.md
+[section suivante] : verify.md

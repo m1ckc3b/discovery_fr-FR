@@ -1,52 +1,51 @@
-# Setting up a development environment
+# Configuration d'un environnement de développement
 
-Dealing with microcontrollers involves several tools as we'll be dealing with an architecture
-different from your computer's and we'll have to run and debug programs on a "remote" device.
+Travailler avec des microcontrôleurs implique plusieurs outils car nous aurons affaire à une architecture
+différente de celle de votre ordinateur et nous devrons exécuter et déboguer des programmes sur un périphérique "distant".
 
 ## Documentation
 
-Tooling is not everything though. Without documentation, it is pretty much impossible to work with
-microcontrollers.
+Les outils ne sont cependant pas tout. Sans documentation, il est pratiquement impossible de travailler avec
+des microcontrôleurs.
 
-We'll be referring to all these documents throughout this book:
+Nous ferons référence à tous ces documents tout au long de ce livre :
 
 - [LSM303AGR]
 
-[LSM303AGR]: https://www.st.com/resource/en/datasheet/lsm303agr.pdf
+[LSM303AGR] : https://www.st.com/resource/en/datasheet/lsm303agr.pdf
 
-## Tools
+## Outils
 
-We'll use all the tools listed below. Where a minimum version is not specified, any recent version
-should work but we have listed the version we have tested.
+Nous utiliserons tous les outils listés ci-dessous. Lorsqu'une version minimale n'est pas spécifiée, toute version récente
+devrait fonctionner, mais nous avons répertorié la version que nous avons testée.
 
-- Rust 1.57.0 or a newer toolchain.
+- Rust 1.57.0 ou version plus récente.
 
-- `gdb-multiarch`. Tested version: 10.2. Other versions will most likely work as well though
-  If your distribution/platform does not have `gdb-multiarch` available `arm-none-eabi-gdb`
-  will do the trick as well. Furthermore, some normal `gdb` binaries are built with multiarch
-  capabilities as well, you can find further information about this in the sub chapters.
+- `gdb-multiarch`. Version testée : 10.2. D'autres versions fonctionneront probablement aussi
+Si votre distribution/plateforme ne dispose pas de `gdb-multiarch`, `arm-none-eabi-gdb` fera également l'affaire. 
+De plus, certains binaires `gdb` normaux sont également construits avec des capacités multiarch, vous pouvez trouver plus d'informations à ce sujet dans les sous-chapitres.
 
-- [`cargo-binutils`]. Version 0.3.3 or newer.
+- [`cargo-binutils`]. Version 0.3.3 ou plus récente.
 
-[`cargo-binutils`]: https://github.com/rust-embedded/cargo-binutils
+[`cargo-binutils`] : https://github.com/rust-embedded/cargo-binutils
 
-- [`cargo-embed`]. Version 0.24.0 or newer.
+- [`cargo-embed`]. Version 0.24.0 ou plus récente.
 
-[`cargo-embed`]: https://probe.rs/docs/tools/cargo-embed/
+[`cargo-embed`] : https://probe.rs/docs/tools/cargo-embed/
 
-- `minicom` on Linux and macOS. Tested version: 2.7.1. Other versions will most likely work as well though
+- `minicom` sur Linux et macOS. Version testée : 2.7.1. D'autres versions fonctionneront probablement aussi
 
-- `PuTTY` on Windows.
+- `PuTTY` sur Windows.
 
-Next, follow OS-agnostic installation instructions for a few of the tools:
+Ensuite, suivez les instructions d'installation indépendantes du système d'exploitation pour quelques-uns des outils :
 
 ### `rustc` & Cargo
 
-Install rustup by following the instructions at [https://rustup.rs](https://rustup.rs).
+Installez rustup en suivant les instructions sur [https://rustup.rs](https://rustup.rs).
 
-If you already have rustup installed double check that you are on the stable
-channel and your stable toolchain is up-to-date. `rustc -V` should return a date
-newer than the one shown below:
+Si vous avez déjà installé rustup, vérifiez que vous êtes sur le canal stable
+et que votre chaîne d'outils stable est à jour. `rustc -V` doit renvoyer une date
+plus récente que celle indiquée ci-dessous :
 
 ``` console
 $ rustc -V
@@ -66,34 +65,34 @@ cargo-size 0.3.3
 
 ### `cargo-embed`
 
-In order to install cargo-embed, first install its [prerequisites](https://probe.rs/docs/getting-started/installation/) (note: these instructions are part of the more general [`probe-rs`](https://probe.rs/) embedded debugging toolkit). Then install it with cargo:
+Pour installer cargo-embed, installez d'abord ses [prérequis](https://probe.rs/docs/getting-started/installation/) (remarque : ces instructions font partie de la boîte à outils de débogage intégrée [`probe-rs`](https://probe.rs/) plus générale). Ensuite, installez-le avec cargo :
 
 ```console
 $ cargo install --locked probe-rs-tools --vers '^0.24'
 ```
 
-**NOTE** This may fail due to frequent changes in `probe-rs`. If so, go to <https://probe.rs> and follow the current installation instructions there.
+**REMARQUE** Cela peut échouer en raison de changements fréquents dans `probe-rs`. Si c'est le cas, accédez à <https://probe.rs> et suivez les instructions d'installation actuelles.
 
-Finally, verify that you have successfully installed `cargo-embed` by running:
+Enfin, vérifiez que vous avez correctement installé `cargo-embed` en exécutant :
 
 ```console
 $ cargo embed --version
 cargo-embed 0.24.0 (git commit: crates.io)
 ```
 
-### This repository
+### Ce référentiel
 
-Since this book also contains some small Rust code bases used in various chapters
-you will also have to download its source code. You can do this in one of the following ways:
+Étant donné que ce livre contient également quelques petites bases de code Rust utilisées dans divers chapitres
+vous devrez également télécharger son code source. Vous pouvez le faire de l'une des manières suivantes :
 
-* Visit the [repository](https://github.com/rust-embedded/discovery/), click the green "Code" button and then the
-   "Download Zip" one
-* Clone it using git (if you know git you presumably already have it installed) from the same repository as linked in
-   the zip approach
+* Visitez le [dépôt](https://github.com/rust-embedded/discovery/), cliquez sur le bouton vert « Code » puis sur le bouton
+« Télécharger le fichier Zip »
+* Clonez-le à l'aide de git (si vous connaissez git, vous l'avez probablement déjà installé) à partir du même dépôt que celui lié dans
+l'approche zip
 
-### OS specific instructions
+### Instructions spécifiques au système d'exploitation
 
-Now follow the instructions specific to the OS you are using:
+Suivez maintenant les instructions spécifiques au système d'exploitation que vous utilisez :
 
 - [Linux](linux.md)
 - [Windows](windows.md)

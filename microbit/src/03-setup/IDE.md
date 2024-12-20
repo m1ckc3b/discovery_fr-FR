@@ -1,31 +1,31 @@
-# Getting the most out of your IDE
+# Tirer le meilleur parti de votre IDE
 
-All code in this book assumes that you use a simple terminal to build your code,
-run it, and interact with it. It also makes no assumption about your text editor.
+Tout le code de ce livre suppose que vous utilisez un terminal simple pour créer votre code,
+l'exécuter et interagir avec lui. Il ne fait également aucune supposition sur votre éditeur de texte.
 
-However, you may have your favourite IDEs, providing you auto-complete, type annotation,
-your preferred shortcuts and much more. This section explains how to get the most out
-of your IDE using the code obtained from this book's repo.
+Cependant, vous pouvez avoir vos IDE préférés, vous offrant la saisie semi-automatique, l'annotation de type,
+vos raccourcis préférés et bien plus encore. Cette section explique comment tirer le meilleur parti
+de votre IDE en utilisant le code obtenu à partir du dépôt de ce livre.
 
-# Auto-completion, type annotation, and more
+# Complétion automatique, annotation de type et plus encore
 
-Some IDEs fail to understand the code, because they fail to determine whether a term
-is defined in the microbit or microbit-v2 codebase. If you fail to get auto-completion to work,
-you may want to try to edit the `Cargo.toml` files you encounter through this book, and remove
-all references to the version of microbit you are not using. That is:
- in the `Cargo.toml` file you must remove the dependency and features you do not use (the part guarded by `#[cfg(feature = "vI")]` and the guard itself)
+Certains IDE ne parviennent pas à comprendre le code, car ils ne parviennent pas à déterminer si un terme
+est défini dans la base de code microbit ou microbit-v2. Si vous ne parvenez pas à faire fonctionner la saisie semi-automatique,
+vous pouvez essayer de modifier les fichiers `Cargo.toml` que vous rencontrez dans ce livre et supprimer
+toutes les références à la version de microbit que vous n'utilisez pas. C'est-à-dire :
+dans le fichier `Cargo.toml`, vous devez supprimer la dépendance et les fonctionnalités que vous n'utilisez pas (la partie protégée par `#[cfg(feature = "vI")]` et la protection elle-même)
 
-# IDE configuration
+# Configuration de l'IDE
 
-Below, we explain how to configure your IDE to get the most out of this book.
-If your IDE is not listed below, please improve this book by adding a section, so that the next
-reader can get the best experience out of it.
+Ci-dessous, nous expliquons comment configurer votre IDE pour tirer le meilleur parti de ce livre.
+Si votre IDE n'est pas répertorié ci-dessous, veuillez améliorer ce livre en ajoutant une section, afin que le prochain
+lecteur puisse en tirer la meilleure expérience.
 
-## How to build with IntelliJ
+## Comment construire avec IntelliJ
 
-When editing the IntelliJ build configuration, here are a few non-default values:
-* You should edit the command. When this book tells you to run `cargo embed FLAGS`,
-You'll need to replace the default value `run` by the command `embed FLAGS`,
-* You should enable "Emulate terminal in output console". Otherwise, your program will fail to print text to a terminal
-* You should ensure that the working directory is `microbit/src/N-name`, with `N-name` being the directory of the chapter you
-are reading. You can not run from the `src` directory since it contains no cargo file.
+Lors de la modification de la configuration de construction d'IntelliJ, voici quelques valeurs non par défaut :
+* Vous devez modifier la commande. Lorsque ce livre vous indique d'exécuter `cargo embed FLAGS`,
+vous devrez remplacer la valeur par défaut `run` par la commande `embed FLAGS`,
+* Vous devez activer « Émuler le terminal dans la console de sortie ». Sinon, votre programme ne parviendra pas à imprimer le texte sur un terminal
+* Vous devez vous assurer que le répertoire de travail est `microbit/src/N-name`, `N-name` étant le répertoire du chapitre que vous
+êtes en train de lire. Vous ne pouvez pas exécuter à partir du répertoire `src` car il ne contient aucun fichier cargo.

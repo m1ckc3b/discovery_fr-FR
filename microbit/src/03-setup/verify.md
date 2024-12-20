@@ -1,74 +1,73 @@
-# Verify the installation
+# Vérification de l'installation
 
-Let's verify that all the tools were installed correctly.
+Vérifions que tous les outils ont été correctement installés.
 
-## Linux only
+## Linux uniquement
 
-### Verify permissions
+### Vérification des autorisations
 
-Connect the micro:bit to your computer using a USB cable.
+Connectez le micro:bit à votre ordinateur à l'aide d'un câble USB.
 
-The micro:bit should now appear as a USB device (file) in `/dev/bus/usb`. Let's find out how it got
-enumerated:
+Le micro:bit doit maintenant apparaître comme un périphérique USB (fichier) dans `/dev/bus/usb`. Voyons comment il a été
+énuméré :
 
 ``` console
 $ lsusb | grep -i "NXP ARM mbed"
 Bus 001 Device 065: ID 0d28:0204 NXP ARM mbed
-$ # ^^^        ^^^
+$ # ^^^ ^^^
 ```
 
-In my case, the micro:bit got connected to the bus #1 and got enumerated as the device #65. This means the
-file `/dev/bus/usb/001/065` *is* the micro:bit. Let's check the file permissions:
+Dans mon cas, le micro:bit a été connecté au bus n°1 et a été énuméré comme le périphérique n°65. Cela signifie que le
+fichier `/dev/bus/usb/001/065` *est* le micro:bit. Vérifions les autorisations du fichier :
 
 ``` console
 $ ls -l /dev/bus/usb/001/065
-crw-rw-r--+ 1 nobody nobody 189, 64 Sep  5 14:27 /dev/bus/usb/001/065
+crw-rw-r--+ 1 nobody nobody 189, 64 Sep 5 14:27 /dev/bus/usb/001/065
 ```
 
-The permissions should be `crw-rw-r--+`, note the `+` at the end, then see your access rights by running the following command.
+Les autorisations doivent être `crw-rw-r--+`, notez le `+` à la fin, puis consultez vos droits d'accès en exécutant la commande suivante.
 
 ``` console
 $ getfacl /dev/bus/usb/001/065
-getfacl: Removing leadin '/' from absolute path names
-# file: dev/bus/usb/001/065
-# owner: nobody
-# group: nobody
+getfacl : suppression du caractère '/' de début des noms de chemin absolu
+# file : dev/bus/usb/001/065
+# owner : nobody
+# group : nobody
 user::rw-
-user:<YOUR-USER-NAME>:rw-
+user:<VOTRE-NOM-D'UTILISATEUR> :rw-
 group::rw-
 mask::rw-
 other::r-
 ```
 
-You should see your username in the list above with the `rw-` permissions, if not ... then check your [udev
-rules] and try re-loading them with:
+Vous devriez voir votre nom d'utilisateur dans la liste ci-dessus avec les autorisations `rw-`, sinon... vérifiez vos [règles
+udev] et essayez de les recharger avec :
 
-[udev rules]: linux.md#udev-rules
+[règles udev] : linux.md#udev-rules
 
 ``` console
 $ sudo udevadm control --reload
 $ sudo udevadm trigger
 ```
 
-# All
+# Tous
 
-## Verifying cargo-embed
-First, connect the micro:bit to your Computer using a USB cable.
+## Vérification de cargo-embed
+Tout d'abord, connectez le micro:bit à votre ordinateur à l'aide d'un Câble USB.
 
-At least an orange LED right next to the USB port of the micro:bit should light up.
-Furthermore, if you have never flashed another program on to your micro:bit, the default
-program the micro:bit ships with should start blinking the red LEDs on its back, you
-can ignore them.
+Au moins une LED orange juste à côté du port USB du micro:bit doit s'allumer.
+De plus, si vous n'avez jamais flashé un autre programme sur votre micro:bit, le programme par défaut fourni avec le micro:bit doit commencer à faire clignoter les LED rouges à l'arrière, vous
+pouvez les ignorer.
 
-Now let's see if probe-rs, and by extensions cargo-embed can see your micro:bit, you can do this by running the following command.
+Voyons maintenant si probe-rs, et par extension cargo-embed, peuvent voir votre micro:bit, vous pouvez le faire en exécutant la commande suivante.
 
 ``` console
 $ probe-rs list
 The following debug probes were found:
-[0]: BBC micro:bit CMSIS-DAP -- 0d28:0204:990636020005282030f57fa14252d446000000006e052820 (CMSIS-DAP)
+[0] : BBC micro:bit CMSIS-DAP -- 0d28:0204:990636020005282030f57fa14252d446000000006e052820 (CMSIS-DAP)
 ```
 
-Or if you want more information about the micro:bits debug capabilities then you can run:
+Ou si vous souhaitez plus d'informations sur les capacités de débogage de micro:bits, vous pouvez exécuter :
 
 ``` console
 $ probe-rs info
@@ -101,9 +100,9 @@ Debugging Xtensa targets over SWD is not supported. For these targets, JTAG is t
 
 ```
 
-Next up you will have to modify `Embed.toml` in the `src/03-setup` directory of the
-book's source code. In the `default.general` section you will find two commented out
-chip variants:
+Vous devrez ensuite modifier `Embed.toml` dans le répertoire `src/03-setup` du code source du
+livre. Dans la section `default.general`, vous trouverez deux
+variantes de puces commentées :
 
 ```toml
 [default.general]
@@ -111,10 +110,10 @@ chip variants:
 # chip = "nrf51822_xxAA" # uncomment this line for micro:bit V1
 ```
 
-If you are working with the micro:bit v2 board uncomment the first, for the v1
-uncomment the second line.
+Si vous travaillez avec la carte micro:bit v2, décommentez la première, pour la v1
+décommentez la deuxième ligne.
 
-Next run one of these commands:
+Ensuite, exécutez l'une de ces commandes :
 
 ```
 $ # make sure you are in src/03-setup of the books source code
@@ -125,15 +124,16 @@ $ cargo embed --target thumbv7em-none-eabihf
 $ # If you are working with micro:bit v1
 $ rustup target add thumbv6m-none-eabi
 $ cargo embed --target thumbv6m-none-eabi
+
 ```
 
-If everything works correctly cargo-embed should first compile the small example program
-in this directory, then flash it and finally open a nice text based user interface that
-prints Hello World.
+Si tout fonctionne correctement, cargo-embed doit d'abord compiler le petit programme d'exemple
+dans ce répertoire, puis le flasher et enfin ouvrir une belle interface utilisateur textuelle qui
+imprime Hello World.
 
-(If it does not, check out [general troubleshooting] instructions.)
+(Si ce n'est pas le cas, consultez les instructions de [dépannage général].)
 
-[general troubleshooting]: ../appendix/1-general-troubleshooting/index.html
+[dépannage général] : ../appendix/1-general-troubleshooting/index.html
 
-This output is coming from the small Rust program you just flashed on to your micro:bit.
-Everything is working properly and you can continue with the next chapters!
+Ce résultat provient du petit programme Rust que vous venez de flasher sur votre micro:bit.
+Tout fonctionne correctement et vous pouvez continuer avec les chapitres suivants !
