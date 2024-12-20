@@ -1,72 +1,70 @@
-# Rust Embedded terminology
-Before we dive into programming the micro:bit let's have a quick look
-at the libraries and terminology that will be important for all the
-future chapters.
+# Terminologie de Rust Embedded
+Avant de nous plonger dans la programmation du micro:bit, jetons un coup d'œil
+rapide aux bibliothèques et à la terminologie qui seront importantes pour tous les
+chapitres à venir.
 
-## Abstraction layers
-For any fully supported microcontroller/board with a microcontroller
-you will usually hear the following terms being used for their levels
-of abstraction:
+## Couches d'abstraction
+Pour tout microcontrôleur/carte entièrement pris en charge avec un microcontrôleur
+vous entendrez généralement les termes suivants utilisés pour leurs
+niveaux d'abstraction :
 
-### Peripheral Access Crate (PAC)
-The job of the PAC is to provide a safe (ish) direct interface to the
-peripherals of the chip, allowing you to configure
-every last bit however you want (of course also in wrong ways). Usually
-you only ever have to deal with the PAC if either the layers that are
-higher up don't fulfill your needs or when you are developing them.
-The PAC we are (implicitly) going to use is either the one for the [nRF52]
-or for the [nRF51].
+### Boîtier d'accès périphérique (PAC - Peripheral Access Crate)
+Le travail du PAC est de fournir une interface directe (plutôt) sûre aux
+périphériques de la puce, vous permettant de configurer
+chaque dernier bit comme vous le souhaitez (bien sûr également de manière incorrecte). En général,
+vous n'avez à traiter avec le PAC que si les couches
+qui sont plus hautes ne répondent pas à vos besoins ou lorsque vous les développez.
+Le PAC que nous allons (implicitement) utiliser est soit celui du [nRF52]
+soit celui du [nRF51].
 
-### The Hardware Abstraction Layer (HAL)
-The job of the HAL is to build up on top of
-the chip's PAC and provide an abstraction that is actually usable for
-someone who does not know about all the special behaviour of this chip.
-Usually they abstract whole peripherals away into single structs that can
-for example be used to send data around via the peripheral. We are
-going to use the [nRF52-hal] or the [nRF51-hal] respectively.
+### La couche d'abstraction matérielle (HAL - Hardware Abstraction Layer)
+Le rôle de la couche HAL est de s'appuyer sur
+le PAC de la puce et de fournir une abstraction réellement utilisable par
+quelqu'un qui ne connaît pas tout le comportement spécial de cette puce.
+En général, ils abstraitent des périphériques entiers dans des structures uniques qui peuvent
+par exemple être utilisées pour envoyer des données via le périphérique. Nous allons
+utiliser respectivement le [nRF52-hal] ou le [nRF51-hal].
 
-### The Board Support Crate (historically called Board Support Package, or BSP)
-The job of the BSP is to abstract a whole board
-(such as the micro:bit) away at once. That means it has to provide
-abstractions to use both the microcontroller as well as the sensors,
-LEDs etc. that might be present on the board. Quite often (especially
-with custom-made boards) you will just be working with a HAL for the
-chip and build the drivers for the sensors either yourself or
-search for them on crates.io. Luckily for us though, the micro:bit
-does actually have a [BSP] so we are going to use that on top of our
-HAL as well.
+### Le Board Support Crate (historiquement appelé Board Support Package, ou BSP)
+Le rôle du BSP est d'abstraire une carte entière
+(comme le micro:bit) en une seule fois. Cela signifie qu'il doit fournir
+des abstractions pour utiliser à la fois le microcontrôleur ainsi que les capteurs,
+les LED, etc. qui peuvent être présents sur la carte. Très souvent (en particulier
+avec des cartes personnalisées), vous travaillerez simplement avec un HAL pour la
+puce et construirez les pilotes pour les capteurs vous-même ou
+les rechercherez sur crates.io. Heureusement pour nous, le micro:bit
+dispose en fait d'un [BSP], nous allons donc l'utiliser en plus de notre
+HAL également.
 
-[nrF52]: https://crates.io/crates/nrf52833-pac
-[nrF51]: https://crates.io/crates/nrf51
-[nrF52-hal]: https://crates.io/crates/nrf52833-hal
-[nrF51-hal]: https://crates.io/crates/nrf51-hal
-[BSP]: https://crates.io/crates/microbit
+[nrF52] : https://crates.io/crates/nrf52833-pac
+[nrF51] : https://crates.io/crates/nrf51
+[nrF52-hal] : https://crates.io/crates/nrf52833-hal
+[nrF51-hal] : https://crates.io/crates/nrf51-hal
+[BSP] : https://crates.io/crates/microbit
 
-## Unifying the layers
+## Unifier les couches
 
-Next we are going to have a look at a very central piece of software
-in the Rust Embedded world: [`embedded-hal`]. As its name suggests it
-relates to the 2nd level of abstraction we got to know: the HALs.
-The idea behind [`embedded-hal`] is to provide a set of traits that
-describe behaviour which is usually shared across all implementations
-of a specific peripheral in all the HALs. For example one would always
-expect to have functions that are capable of turning the power on a pin
-either on or off. For example to switch an LED on and off on the board.
-This allows us to write a driver for, say a temperature sensor, that
-can be used on any chip for which an implementation of the [`embedded-hal`] traits exists,
-simply by writing the driver in such a way that it only relies on the
-[`embedded-hal`] traits. Drivers that are written in such a way are called
-platform agnostic and luckily for us most of the drivers on crates.io
-are actually platform agnostic.
+Nous allons maintenant examiner un élément logiciel très central
+dans le monde de Rust Embedded : [`embedded-hal`]. Comme son nom l'indique, il
+fait référence au 2e niveau d'abstraction que nous avons appris à connaître : les HAL.
+L'idée derrière [`embedded-hal`] est de fournir un ensemble de traits qui
+décrivent le comportement qui est généralement partagé par toutes les implémentations
+d'un périphérique spécifique dans tous les HAL. Par exemple, on s'attendrait toujours
+à avoir des fonctions capables d'allumer ou d'éteindre une broche. Par exemple, pour allumer et éteindre une LED sur la carte.
+Cela nous permet d'écrire un pilote pour, par exemple, un capteur de température, qui
+peut être utilisé sur n'importe quelle puce pour laquelle une implémentation des traits [`embedded-hal`] existe,
+simplement en écrivant le pilote de telle manière qu'il ne repose que sur les
+traits [`embedded-hal`]. Les pilotes qui sont écrits de cette manière sont dits
+indépendants de la plate-forme et heureusement pour nous, la plupart des pilotes sur crates.io
+sont en fait indépendants de la plate-forme.
 
-[`embedded-hal`]: https://crates.io/crates/embedded-hal
+[`embedded-hal`] : https://crates.io/crates/embedded-hal
 
+## Lectures complémentaires
 
-## Further reading
-
-If you want to learn more about these levels of abstraction, Franz Skarman,
-a.k.a. [TheZoq2], held a talk about this topic during Oxidize 2020, called
+Si vous souhaitez en savoir plus sur ces niveaux d'abstraction, Franz Skarman,
+alias [TheZoq2], a tenu une conférence sur ce sujet lors d'Oxidize 2020, intitulée
 [An Overview of the Embedded Rust Ecosystem].
 
-[TheZoq2]: https://github.com/TheZoq2/
-[An Overview of the Embedded Rust Ecosystem]: https://www.youtube.com/watch?v=vLYit_HHPaY
+[TheZoq2] : https://github.com/TheZoq2/
+[An Overview of the Embedded Rust Ecosystem] : https://www.youtube.com/watch?v=vLYit_HHPaY

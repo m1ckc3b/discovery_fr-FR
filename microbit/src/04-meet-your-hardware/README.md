@@ -1,6 +1,6 @@
-# Meet your hardware
+# Découvrez votre matériel
 
-Let's get familiar with the hardware we'll be working with.
+Familiarisons-nous avec le matériel avec lequel nous allons travailler.
 
 ## micro:bit
 
@@ -8,27 +8,27 @@ Let's get familiar with the hardware we'll be working with.
 <img title="micro:bit" src="../assets/microbit-v2.jpg">
 </p>
 
-Here are some of the many components on the board:
+Voici quelques-uns des nombreux composants de la carte :
 
-- A [microcontroller].
-- A number of LEDs, most notably the LED matrix on the back
-- Two user buttons as well as a reset button (the one next to the USB port).
-- One USB port.
-- A sensor that is both a [magnetometer] and an [accelerometer]
+- Un [microcontrôleur].
+- Un certain nombre de LED, notamment la matrice LED à l'arrière
+- Deux boutons utilisateur ainsi qu'un bouton de réinitialisation (celui à côté du port USB).
+- Un port USB.
+- Un capteur qui est à la fois un [magnétomètre] et un [accéléromètre]
 
-[microcontroller]: https://en.wikipedia.org/wiki/Microcontroller
-[accelerometer]: https://en.wikipedia.org/wiki/Accelerometer
-[magnetometer]: https://en.wikipedia.org/wiki/Magnetometer
+[microcontrôleur] : https://fr.wikipedia.org/wiki/Microcontr%C3%B4leur
+[accéléromètre] : https://fr.wikipedia.org/wiki/Acc%C3%A9l%C3%A9rom%C3%A8tre
+[magnétomètre] : https://fr.wikipedia.org/wiki/Magn%C3%A9tom%C3%A8tre
 
-Of these components, the most important is the microcontroller (sometimes
-shortened to "MCU" for "microcontroller unit"), which is the bigger of the two
-black squares sitting on the side of the board with the USB port. The MCU is
-what runs your code. You might sometimes read about "programming a board", when
-in reality what we are doing is programming the MCU that is installed on the board.
+Parmi ces composants, le plus important est le microcontrôleur (parfois
+abrégé en "MCU" pour "microcontroller unit"), qui est le plus grand des deux
+carrés noirs situés sur le côté de la carte avec le port USB. Le MCU est
+ce qui exécute votre code. Vous pouvez parfois lire sur la "programmation d'une carte", alors que
+en réalité, ce que nous faisons, c'est programmer le MCU qui est installé sur la carte.
 
-If you happen to be interested in a more in detail description of the board you
-can checkout the [micro:bit website](https://tech.microbit.org/hardware/).
+Si vous êtes intéressé par une description plus détaillée de la carte, vous
+pouvez consulter le site Web [micro:bit](https://tech.microbit.org/hardware/).
 
-Since the MCU is so important, let's take a closer look at the one sitting on our board.
-Note that only one of the following two sections applies to your board, depending on whether
-you are working with a micro:bit v2 or v1.
+Étant donné que le MCU est si important, examinons de plus près celui qui se trouve sur notre carte.
+Notez qu'une seule des deux sections suivantes s'applique à votre carte, selon que
+vous travaillez avec un micro:bit v2 ou v1.
