@@ -2,11 +2,11 @@
 
 ## embedded-hal
 
-In this chapter we are going to make one of the many LEDs on the back of the micro:bit light up since this is
-basically the "Hello World" of embedded programming. In order to get this task done we will use one of the traits
-provided by `embedded-hal`, specifically the [`OutputPin`] trait which allows us to turn a pin on or off.
+Dans ce chapitre, nous allons allumer l'une des nombreuses LED à l'arrière du micro:bit, car il s'agit
+essentiellement du "Hello World" de la programmation embarquée. Pour réaliser cette tâche, nous utiliserons l'un des traits
+fournis par `embedded-hal`, en particulier le trait [`OutputPin`] qui nous permet d'activer ou de désactiver une broche.
 
-[`OutputPin`]: https://docs.rs/embedded-hal/0.2.6/embedded_hal/digital/v2/trait.OutputPin.html
+[`OutputPin`] : https://docs.rs/embedded-hal/0.2.6/embedded_hal/digital/v2/trait.OutputPin.html
 
 ## The micro:bit LEDs
 
