@@ -1,82 +1,78 @@
-# Background
+# Contexte
 
-## What's a microcontroller?
+## Qu'est-ce qu'un microcontrôleur ?
 
-A microcontroller is a *system* on a chip. Whereas your computer is made up of several discrete
-components: a processor, RAM, storage, an Ethernet port, etc.; a microcontroller has all those types
-of components built into a single "chip" or package. This makes it possible to build systems with
-fewer parts.
+Un microcontrôleur est un *système* sur une puce. Alors que votre ordinateur est composé de plusieurs
+composants discrets : un processeur, une RAM, un stockage, un port Ethernet, etc. ; un microcontrôleur possède tous ces types
+de composants intégrés dans une seule "puce" ou un seul boîtier. Cela permet de construire des systèmes avec
+moins de pièces.
 
-## What can you do with a microcontroller?
+## Que peut-on faire avec un microcontrôleur ?
 
-Lots of things! Microcontrollers are the central part of what are known as "*embedded* systems".
-Embedded systems are everywhere, but you don't usually notice them. They control the machines that
-wash your clothes, print your documents, and cook your food. Embedded systems keep the buildings
-that you live and work in at a comfortable temperature, and control the components that make the
-vehicles you travel in stop and go.
+Beaucoup de choses ! Les microcontrôleurs sont la partie centrale de ce que l'on appelle les "systèmes *embarqués*".
+Les systèmes embarqués sont partout, mais vous ne les remarquez généralement pas. Ils contrôlent les machines qui
+lavent vos vêtements, impriment vos documents et cuisinent vos aliments. Les systèmes embarqués maintiennent les bâtiments
+dans lesquels vous vivez et travaillez à une température confortable et contrôlent les composants qui font que
+les véhicules dans lesquels vous voyagez s'arrêtent et repartent.
 
-Most embedded systems operate without user intervention. Even if they expose a user interface like a
-washing machine does; most of their operation is done on their own.
+La plupart des systèmes embarqués fonctionnent sans intervention de l'utilisateur. Même s'ils exposent une interface utilisateur comme le fait
+une machine à laver ; la plupart de leur fonctionnement est effectué de manière autonome.
 
-Embedded systems are often used to *control* a physical process. To make this possible, they have
-one or more devices to tell them about the state of the world ("sensors"), and one or more
-devices which allow them to change things ("actuators"). For example, a building climate control
-system might have:
+Les systèmes embarqués sont souvent utilisés pour *contrôler* un processus physique. Pour rendre cela possible, ils disposent
+d'un ou plusieurs dispositifs pour les informer de l'état du monde (« capteurs ») et d'un ou plusieurs
+dispositifs qui leur permettent de changer les choses (« actionneurs »). Par exemple, un système de contrôle de la climatisation d'un bâtiment
+peut avoir :
 
-- Sensors which measure temperature and humidity in various locations.
-- Actuators which control the speed of fans.
-- Actuators which cause heat to be added or removed from the building.
+- Des capteurs qui mesurent la température et l'humidité à divers endroits.
 
-## When should I use a microcontroller?
+- Des actionneurs qui contrôlent la vitesse des ventilateurs.
 
-Many of the embedded systems listed above could be implemented with a computer running Linux (for
-example a "Raspberry Pi"). Why use a microcontroller instead? Sounds like it might be harder to
-develop a program.
+- Des actionneurs qui provoquent l'ajout ou le retrait de chaleur du bâtiment.
 
-Some reasons might include:
+## Quand dois-je utiliser un microcontrôleur ?
 
-**Cost.** A microcontroller is much cheaper than a general purpose computer. Not only is the
-microcontroller cheaper; it also requires many fewer external electrical components to operate.
-This makes Printed Circuit Boards (PCB) smaller and cheaper to design and manufacture.
+La plupart des systèmes embarqués énumérés ci-dessus pourraient être mis en œuvre avec un ordinateur exécutant Linux (par
+exemple un « Raspberry Pi »). Pourquoi utiliser un microcontrôleur à la place ? Il semble qu'il soit plus difficile de
+développer un programme.
 
-**Power consumption.** Most microcontrollers consume a fraction of the power of a full blown
-processor. For applications which run on batteries, that makes a huge difference.
+Voici quelques raisons :
 
-**Responsiveness.** To accomplish their purpose, some embedded systems must always react within a
-limited time interval (e.g. the "anti-lock" braking system of a car). If the system misses this
-type of *deadline*, a catastrophic failure might occur. Such a deadline is called a "hard real time"
-requirement. An embedded system which is bound by such a deadline is referred to as a "hard
-real-time system". A general purpose computer and OS usually has many software components which
-share the computer's processing resources. This makes it harder to guarantee execution of a program
-within tight time constraints.
+**Coût.** Un microcontrôleur est beaucoup moins cher qu'un ordinateur à usage général. Non seulement le
+microcontrôleur est moins cher, mais il nécessite également beaucoup moins de composants électriques externes pour fonctionner.
+Cela rend les cartes de circuits imprimés (PCB) plus petites et moins chères à concevoir et à fabriquer.
 
-**Reliability.** In systems with fewer components (both hardware and software), there is less to go
-wrong!
+**Consommation d'énergie.** La plupart des microcontrôleurs consomment une fraction de l'énergie d'un
+processeur complet. Pour les applications fonctionnant sur batterie, cela fait une énorme différence.
 
-## When should I *not* use a microcontroller?
+**Réactivité.** Pour atteindre leur objectif, certains systèmes embarqués doivent toujours réagir dans un
+intervalle de temps limité (par exemple, le système de freinage "antiblocage" d'une voiture). Si le système ne respecte pas ce
+type de *délai*, une panne catastrophique peut se produire. Un tel délai est appelé une exigence
+"temps réel dur". Un système embarqué qui est lié par un tel délai est appelé "système temps réel dur". Un ordinateur à usage général et un système d'exploitation comportent généralement de nombreux
+composants logiciels qui partagent les ressources de traitement de l'ordinateur. Il est donc plus difficile de garantir l'exécution d'un
+programme dans des délais serrés.
 
-Where heavy computations are involved. To keep their power consumption low, microcontrollers have
-very limited computational resources available to them. For example, some microcontrollers don't
-even have hardware support for floating point operations. On those devices, performing a simple
-addition of single precision numbers can take hundreds of CPU cycles.
+**Fiabilité.** Dans les systèmes comportant moins de composants (matériels et logiciels), il y a moins de risques de
+défaillance !
 
-## Why use Rust and not C?
+## Quand dois-je *ne pas* utiliser un microcontrôleur ?
 
-Hopefully, I don't need to convince you here as you are probably familiar with the language
-differences between Rust and C. One point I do want to bring up is package management. C lacks an
-official, widely accepted package management solution whereas Rust has Cargo. This makes development
-*much* easier. And, IMO, easy package management encourages code reuse because libraries can be
-easily integrated into an application which is also a good thing as libraries get more "battle
-testing".
+Lorsque des calculs lourds sont impliqués. Pour maintenir leur consommation d'énergie à un niveau bas, les microcontrôleurs ont
+des ressources de calcul très limitées à leur disposition. Par exemple, certains microcontrôleurs n'ont même pas
+de support matériel pour les opérations en virgule flottante. Sur ces appareils, effectuer une simple
+addition de nombres en simple précision peut prendre des centaines de cycles CPU.
 
-## Why should I not use Rust?
+## Pourquoi utiliser Rust et pas C ?
 
-Or why should I prefer C over Rust?
+J'espère que je n'ai pas besoin de vous convaincre ici, car vous connaissez probablement les
+différences de langage entre Rust et C. Un point que je veux soulever est la gestion des paquets. C manque d'une
+solution de gestion de paquets officielle et largement acceptée alors que Rust a Cargo. Cela rend le développement
+*beaucoup* plus facile. Et, à mon avis, une gestion facile des paquets encourage la réutilisation du code car les bibliothèques peuvent être
+facilement intégrées dans une application, ce qui est également une bonne chose car les bibliothèques font l'objet de plus de "tests de combat".
 
-The C ecosystem is way more mature. Off the shelf solutions for several problems already exist. If
-you need to control a time sensitive process, you can grab one of the existing commercial Real Time
-Operating Systems (RTOS) out there and solve your problem. There are no commercial, production-grade
-RTOSes in Rust yet so you would have to either create one yourself or try one of the ones that are
-in development. You can find a list of those in the [Awesome Embedded Rust] repository.
+## Pourquoi ne devrais-je pas utiliser Rust ?
 
-[Awesome Embedded Rust]: https://github.com/rust-embedded/awesome-embedded-rust#real-time-operating-system-rtos
+Ou pourquoi devrais-je préférer C à Rust ?
+
+L'écosystème C est bien plus mature. Il existe déjà des solutions prêtes à l'emploi pour plusieurs problèmes. Si vous devez contrôler un processus sensible au temps, vous pouvez vous procurer l'un des systèmes d'exploitation en temps réel (RTOS) commerciaux existants et résoudre votre problème. Il n'existe pas encore de RTOS commercial de niveau production dans Rust, vous devrez donc en créer un vous-même ou essayer l'un de ceux qui sont en cours de développement. Vous pouvez trouver une liste de ceux-ci dans le dépôt [Awesome Embedded Rust].
+
+[Awesome Embedded Rust] : https://github.com/rust-embedded/awesome-embedded-rust#real-time-operating-system-rtos
