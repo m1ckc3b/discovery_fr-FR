@@ -1,67 +1,65 @@
-# Discovery
+# Découverte
 
-> Discover the world of microcontrollers through [Rust]!
+> Découvrez le monde des microcontrolleurs grâce à [Rust]!
 
-[Rust]: https://www.rust-lang.org/
+[Rust]: https://www.rust-lang.org/fr/
 
-This book is an introductory course on microcontroller-based embedded systems that uses Rust as the
-teaching language rather than the usual C/C++.
+Ce livre est un cours d'introduction aux systèmes embarqués basés sur des microcontrôleurs qui utilise Rust comme
+langage d'enseignement plutôt que le C/C++ habituel.
 
-## Scope
+## Portée
 
-The following topics will be covered (eventually, I hope):
+Les sujets suivants seront abordés (éventuellement, je l'espère) :
 
-- How to write, build, flash and debug an "embedded" (Rust) program.
+- Comment écrire, construire, flasher et déboguer un programme " embarqué " (Rust).
 
-- Functionality ("peripherals") commonly found in microcontrollers: Digital input and output, Pulse
-  Width Modulation (PWM), Analog to Digital Converters (ADC), common communication protocols like
-  Serial, I2C and SPI, etc.
+- Fonctionnalités (" périphériques ") que l'on trouve couramment dans les microcontrôleurs : entrée et sortie numériques, modulation de largeur d'impulsion (PWM), convertisseurs analogique-numérique (ADC), protocoles de communication courants tels que
+série, I2C et SPI, etc.
 
-- Multitasking concepts: cooperative vs preemptive multitasking, interrupts, schedulers, etc.
+- Concepts multitâches : multitâche coopératif ou préemptif, interruptions, planificateurs, etc.
 
-- Control systems concepts: sensors, calibration, digital filters, actuators, open loop control,
-  closed loop control, etc.
+- Concepts des systèmes de contrôle : capteurs, étalonnage, filtres numériques, actionneurs, contrôle en boucle ouverte,
+contrôle en boucle fermée, etc.
 
-## Approach
+## Approche
 
-- Beginner friendly. No previous experience with microcontrollers or embedded systems is required.
+- Adapté aux débutants. Aucune expérience préalable avec les microcontrôleurs ou les systèmes embarqués n'est requise.
 
-- Hands on. Plenty of exercises to put the theory into practice. *You* will be doing most of the
-  work here.
+- Pratique. De nombreux exercices pour mettre la théorie en pratique. *Vous* ferez la plupart du travail ici.
 
-- Tool centered. We'll make plenty use of tooling to ease development. "Real" debugging, with GDB,
-  and logging will be introduced early on. Using LEDs as a debugging mechanism has no place here.
+- Centré sur les outils. Nous utiliserons largement les outils pour faciliter le développement. Le débogage "réel", avec GDB,
+et la journalisation seront introduits dès le début. L'utilisation de LED comme mécanisme de débogage n'a pas sa place ici.
 
-## Non-goals
+## Non-objectifs
 
-What's out of scope for this book:
+Ce qui est hors de portée de ce livre :
 
-- Teaching Rust. There's plenty of material on that topic already. We'll focus on microcontrollers
-  and embedded systems.
+- Enseigner Rust. Il existe déjà beaucoup de matériel sur ce sujet. Nous nous concentrerons sur les microcontrôleurs
+et les systèmes embarqués.
 
-- Being a comprehensive text about electric circuit theory or electronics. We'll just cover the
-  minimum required to understand how some devices work.
+- Être un texte complet sur la théorie des circuits électriques ou l'électronique. Nous couvrirons simplement le
+minimum requis pour comprendre le fonctionnement de certains appareils.
 
-- Covering details such as linker scripts and the boot process. For example, we'll use existing tools
-  to help get your code onto your board, but not go into detail about how those tools work.
+- Couvrir des détails tels que les scripts de liaison et le processus de démarrage. Par exemple, nous utiliserons des outils
+existants pour vous aider à placer votre code sur votre carte, mais nous n'entrerons pas dans les détails sur le fonctionnement de ces outils.
 
-Also I don't intend to port this material to other development boards; this book will make exclusive
-use of the micro:bit development board.
+Je n'ai pas non plus l'intention de porter ce matériel sur d'autres cartes de développement ; ce livre fera un usage exclusif
+de la carte de développement micro:bit.
 
-## Reporting problems
+## Signaler des problèmes
 
-The source of this book is in [this repository]. If you encounter any typo or problem with the code
-report it on the [issue tracker].
+La source de ce livre se trouve dans [ce dépôt]. Si vous rencontrez une faute de frappe ou un problème avec le code
+signalez-le sur le [suivi des problèmes].
 
-[this repository]: https://github.com/rust-embedded/discovery
-[issue tracker]: https://github.com/rust-embedded/discovery/issues
+[ce référentiel] : https://github.com/rust-embedded/discovery
+[suivi des problèmes] : https://github.com/rust-embedded/discovery/issues
 
-## Other embedded Rust resources
+## Autres ressources Rust intégrées
 
-This Discovery book is just one of several embedded Rust resources provided by the
-[Embedded Working Group]. The full selection can be found at [The Embedded Rust Bookshelf]. This
-includes the list of [Frequently Asked Questions].
+Ce livre Discovery n'est qu'une des nombreuses ressources Rust intégrées fournies par le
+[Groupe de travail intégré]. La sélection complète est disponible dans [The Embedded Rust Bookshelf]. Cela
+comprend la liste des [Questions fréquemment posées].
 
-[Embedded Working Group]: https://github.com/rust-embedded/wg
-[The Embedded Rust Bookshelf]: https://docs.rust-embedded.org
-[Frequently Asked Questions]: https://docs.rust-embedded.org/faq.html
+[Groupe de travail intégré] : https://github.com/rust-embedded/wg
+[La bibliothèque Embedded Rust] : https://docs.rust-embedded.org
+[Foire aux questions] : https://docs.rust-embedded.org/faq.html
